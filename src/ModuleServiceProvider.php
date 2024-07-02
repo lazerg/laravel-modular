@@ -5,6 +5,7 @@ namespace Lazerg\LaravelModular;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Lazerg\LaravelModular\Loaders\Loaders;
+use Lazerg\LaravelModular\Facades\Modular;
 
 /**
  * @class ModuleServiceProvider
@@ -13,11 +14,6 @@ use Lazerg\LaravelModular\Loaders\Loaders;
 class ModuleServiceProvider extends ServiceProvider
 {
     use Loaders;
-
-    /**
-     * @var \Lazerg\LaravelModular\Modular
-     */
-    private Modular $modular;
 
     /**
      * @var string
@@ -37,7 +33,7 @@ class ModuleServiceProvider extends ServiceProvider
         parent::__construct($app);
 
         $this->name = Str::before(class_basename($this), 'ServiceProvider');
-        $this->path = modules_path($this->name);
+        $this->path = Modular::modulesPath($this->name);
     }
 
     /**
@@ -45,8 +41,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->modular = $this->app->make(Modular::class);
-        $this->modular->addModule($this->name);
+        Modular::addModule($this->name);
 
         $this->loadCommands();
         $this->loadEvents();

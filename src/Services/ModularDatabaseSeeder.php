@@ -2,8 +2,8 @@
 
 namespace Lazerg\LaravelModular\Services;
 
-use Lazerg\LaravelModular\Facades\ModulePath;
 use Illuminate\Database\Seeder;
+use Lazerg\LaravelModular\Facades\Modular;
 
 /**
  * @class ModularDatabaseSeeder
@@ -41,7 +41,7 @@ class ModularDatabaseSeeder extends Seeder
      */
     protected function addModuleSeeders(): void
     {
-        ModulePath::getModuleClasses('Database\Seeders\DatabaseSeeder')
+        Modular::getModuleClasses('Database\Seeders\DatabaseSeeder')
             ->map(fn(string $seeder) => new $seeder())
             ->each(function (BaseDatabaseSeeder $seeder) {
                 $this->earlySeeders = array_merge(

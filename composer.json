@@ -17,10 +17,7 @@
     "autoload": {
         "psr-4": {
             "Lazerg\\LaravelModular\\": "src/"
-        },
-        "files": [
-            "src/Helpers/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {

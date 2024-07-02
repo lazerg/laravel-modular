@@ -36,6 +36,15 @@ class Modular
 
     /**
      * @param string $path
+     * @return string
+     */
+    public function modulesPath(string $path = ''): string
+    {
+        return base_path('modules/' . $path);
+    }
+
+    /**
+     * @param string $path
      * @return \Illuminate\Support\Collection
      */
     public function getModuleClasses(string $path): Collection
