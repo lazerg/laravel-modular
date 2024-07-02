@@ -8,7 +8,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @class ConfigsLoader
- * @package App\Modules\Loaders
+ * @package Lazerg\LaravelModular\Loaders
  */
 trait ConfigsLoader
 {

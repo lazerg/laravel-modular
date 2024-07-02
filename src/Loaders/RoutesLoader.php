@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 /**
  * @class RoutesLoader
- * @package App\Modules\Loaders
+ * @package Lazerg\LaravelModular\Loaders
  */
 trait RoutesLoader
 {
