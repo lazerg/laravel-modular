@@ -12,4 +12,3 @@ if (!function_exists('modules_path')) {
         return base_path('modules/' . $path);
     }
 }
-?>
