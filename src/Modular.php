@@ -64,7 +64,7 @@ class Modular
     {
         return $this
             ->modules
-            ->mapWithKeys(fn(string $module) => [$module => modules_path($module . $path)])
+            ->mapWithKeys(fn(string $module) => [$module => $this->modulesPath($module . $path)])
             ->filter(fn(string $path) => File::isDirectory($path))
             ->map(fn(string $path) => array_map(
                 fn(SplFileInfo $file) => $file->getRealPath(),
