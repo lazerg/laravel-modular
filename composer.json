@@ -1,0 +1,32 @@
+{
+    "name": "lazerg/laravel-modular",
+    "description": "Laravel Modular",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "lazerg",
+            "email": "lazerg2@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^11.0",
+        "spatie/regex": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lazerg\\LaravelModular\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lazerg\\LaravelModular\\LaravelModularServiceProvider"
+            ]
+        }
+    }
+}
