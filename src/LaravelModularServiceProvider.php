@@ -27,7 +27,7 @@ class LaravelModularServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(Modular::class, fn() => new Modular());
+        $this->app->singleton(Modular::class, fn() => new Modular());
         $this->app->bind(ModulePath::class, fn() => new ModulePath());
         $this->app->make(FactoryLoader::class)->load();
 

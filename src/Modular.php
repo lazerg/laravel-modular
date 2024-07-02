@@ -2,6 +2,8 @@
 
 namespace Lazerg\LaravelModular;
 
+use Illuminate\Support\Collection;
+
 /**
  * @class Modular
  * @package Lazerg\LaravelModular
@@ -9,9 +11,12 @@ namespace Lazerg\LaravelModular;
 class Modular
 {
     /**
-     * @var array
+     * @param \Illuminate\Support\Collection $modules
      */
-    protected array $modules;
+    public function __construct(public Collection $modules)
+    {
+        $this->modules = collect();
+    }
 
     /**
      * @param string $module
@@ -19,6 +24,6 @@ class Modular
      */
     public function addModule(string $module): void
     {
-        $this->modules[] = $module;
+        $this->modules->add($module);
     }
 }

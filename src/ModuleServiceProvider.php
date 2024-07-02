@@ -36,11 +36,8 @@ class ModuleServiceProvider extends ServiceProvider
     {
         parent::__construct($app);
 
-        $this->modular = $app->make(Modular::class);
-        $this->name    = Str::before(class_basename($this), 'ServiceProvider');
-        $this->path    = modules_path($this->name);
-
-        $this->modular->addModule($this->name);
+        $this->name = Str::before(class_basename($this), 'ServiceProvider');
+        $this->path = modules_path($this->name);
     }
 
     /**
@@ -48,6 +45,9 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->modular = $this->app->make(Modular::class);
+        $this->modular->addModule($this->name);
+
         $this->loadCommands();
         $this->loadEvents();
         $this->loadObservers();
