@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Event;
 trait EventsLoader
 {
     /**
+     * @var array
+     */
+    protected array $events = [];
+
+    /**
      * @return void
      */
     protected function loadEvents(): void

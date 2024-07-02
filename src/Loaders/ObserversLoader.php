@@ -9,6 +9,11 @@ namespace Lazerg\LaravelModular\Loaders;
 trait ObserversLoader
 {
     /**
+     * @var array
+     */
+    protected array $observers = [];
+    
+    /**
      * @return void
      */
     protected function loadObservers(): void

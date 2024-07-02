@@ -15,6 +15,11 @@ class ModuleServiceProvider extends ServiceProvider
     use Loaders;
 
     /**
+     * @var \Lazerg\LaravelModular\Modular
+     */
+    private Modular $modular;
+
+    /**
      * @var string
      */
     protected string $name;
@@ -25,53 +30,24 @@ class ModuleServiceProvider extends ServiceProvider
     protected string $path;
 
     /**
-     * @var array
+     * @param $app
      */
-    protected array $commands = [];
+    public function __construct($app)
+    {
+        parent::__construct($app);
 
-    /**
-     * @var array
-     */
-    protected array $events = [];
+        $this->modular = $app->make(Modular::class);
+        $this->name    = Str::before(class_basename($this), 'ServiceProvider');
+        $this->path    = modules_path($this->name);
 
-    /**
-     * @var array
-     */
-    protected array $observers = [];
-
-    /**
-     * @var array
-     */
-    protected array $policies = [];
-
-    /**
-     * @var bool
-     */
-    protected bool $disableRoutePluralization = false;
-
-    /**
-     * @var bool
-     */
-    protected bool $disableWebRoutePrefix = false;
-
-    /**
-     * @var bool
-     */
-    protected bool $mustBeAuthenticated = true;
-
-    /**
-     * @var bool
-     */
-    protected bool $mustBeGuest = false;
+        $this->modular->addModule($this->name);
+    }
 
     /**
      * @return void
      */
     public function boot(): void
     {
-        $this->name = $this->getModuleName();
-        $this->path = $this->getModulePath();
-
         $this->loadCommands();
         $this->loadEvents();
         $this->loadObservers();
@@ -81,21 +57,5 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadRoutes();
         $this->loadTranslations();
         $this->loadViews();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getModuleName(): string
-    {
-        return Str::before(class_basename($this), 'ServiceProvider');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getModulePath(): string
-    {
-        return modules_path($this->getModuleName());
     }
 }

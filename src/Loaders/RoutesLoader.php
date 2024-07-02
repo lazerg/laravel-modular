@@ -13,6 +13,26 @@ use Illuminate\Support\Str;
 trait RoutesLoader
 {
     /**
+     * @var bool
+     */
+    protected bool $disableRoutePluralization = false;
+
+    /**
+     * @var bool
+     */
+    protected bool $disableWebRoutePrefix = false;
+
+    /**
+     * @var bool
+     */
+    protected bool $mustBeAuthenticated = true;
+
+    /**
+     * @var bool
+     */
+    protected bool $mustBeGuest = false;
+
+    /**
      * @return void
      */
     public function loadRoutes(): void

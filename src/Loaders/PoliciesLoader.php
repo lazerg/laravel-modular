@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Gate;
 trait PoliciesLoader
 {
     /**
+     * @var array
+     */
+    protected array $policies = [];
+
+    /**
      * @return void
      */
     protected function loadPolicies(): void
