@@ -45,10 +45,15 @@ class TranslationsGeneratorCommand extends Command
             'locale' => config('app.locale'),
         ];
 
-        Modular::getModuleFiles('/lang')
-            ->each(function (array $paths, string $module) {
-                foreach ($paths as $path) {
-                    $this->addTranslation($module, $path);
+        collect(trans()->getLoader()->namespaces())
+            ->filter(fn(string $path) => File::isDirectory($path))
+            ->each(function (string $path, string $module) {
+                foreach (File::allFiles($path) as $file) {
+                    $this->addTranslation(
+                        module: $module,
+                        locale: $file->getRelativePath(),
+                        path: $file->getPathname()
+                    );
                 }
             });
 
@@ -62,21 +67,17 @@ class TranslationsGeneratorCommand extends Command
 
     /**
      * @param string $module
+     * @param string $locale
      * @param string $path
      * @return void
-     * @throws \Spatie\Regex\Exceptions\RegexFailed
      */
-    protected function addTranslation(string $module, string $path): void
-    {
-        // lang/{match-1}/{match-2}.php
-        $matches = Regex::match('/\/lang\/([^\/]+)\/([^\/]+)\.php/', $path);
+    protected function addTranslation(
+        string $module,
+        string $locale,
+        string $path
+    ): void {
+        $translations = include $path;
 
-        $key = implode('.', [
-            $matches->group(1),
-            strtolower($module),
-            $matches->group(2),
-        ]);
-
-        Arr::set($this->translations, $key, include $path);
+        Arr::set($this->translations, $locale . '.' . $module, $translations);
     }
 }
