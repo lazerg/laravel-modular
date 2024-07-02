@@ -5,7 +5,7 @@ namespace Lazerg\LaravelModular\Commands\Frontend;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Lazerg\LaravelModular\Facades\ModulePath;
+use Lazerg\LaravelModular\Facades\Modular;
 use Spatie\Regex\Regex;
 
 /**
@@ -45,7 +45,7 @@ class TranslationsGeneratorCommand extends Command
             'locale' => config('app.locale'),
         ];
 
-        ModulePath::getModuleFiles('/lang')
+        Modular::getModuleFiles('/lang')
             ->each(function (array $paths, string $module) {
                 foreach ($paths as $path) {
                     $this->addTranslation($module, $path);

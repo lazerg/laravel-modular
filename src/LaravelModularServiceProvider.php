@@ -5,7 +5,6 @@ namespace Lazerg\LaravelModular;
 use Illuminate\Support\ServiceProvider;
 use Lazerg\LaravelModular\Commands\Frontend\TranslationsGeneratorCommand;
 use Lazerg\LaravelModular\Services\FactoryLoader;
-use Lazerg\LaravelModular\Services\ModulePath;
 
 /**
  * @class LaravelModularServiceProvider
@@ -18,7 +17,7 @@ class LaravelModularServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        //
     }
 
     /**
@@ -28,7 +27,7 @@ class LaravelModularServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->singleton(Modular::class, fn() => new Modular());
-        $this->app->bind(ModulePath::class, fn() => new ModulePath());
+
         $this->app->make(FactoryLoader::class)->load();
 
         $this->commands([
