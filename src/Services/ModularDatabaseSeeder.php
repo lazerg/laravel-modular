@@ -6,10 +6,10 @@ use Lazerg\LaravelModular\Facades\ModulePath;
 use Illuminate\Database\Seeder;
 
 /**
- * @class DatabaseSeeder
+ * @class ModularDatabaseSeeder
  * @package Lazerg\LaravelModular\Services
  */
-class DatabaseSeeder extends Seeder
+class ModularDatabaseSeeder extends Seeder
 {
     /**
      * @var array
