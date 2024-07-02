@@ -5,8 +5,6 @@ namespace Lazerg\LaravelModular\Commands\Frontend;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Lazerg\LaravelModular\Facades\Modular;
-use Spatie\Regex\Regex;
 
 /**
  * @class TranslationsGeneratorCommand
@@ -37,7 +35,6 @@ class TranslationsGeneratorCommand extends Command
      * Execute the console command.
      *
      * @return void
-     * @throws \Spatie\Regex\Exceptions\RegexFailed
      */
     public function handle(): void
     {
@@ -52,6 +49,7 @@ class TranslationsGeneratorCommand extends Command
                     $this->addTranslation(
                         module: $module,
                         locale: $file->getRelativePath(),
+                        file: $file->getFilenameWithoutExtension(),
                         path: $file->getPathname()
                     );
                 }
@@ -68,16 +66,22 @@ class TranslationsGeneratorCommand extends Command
     /**
      * @param string $module
      * @param string $locale
+     * @param string $file
      * @param string $path
      * @return void
      */
     protected function addTranslation(
         string $module,
         string $locale,
+        string $file,
         string $path
     ): void {
-        $translations = include $path;
+        $key = implode('.', [
+            $locale,
+            $module,
+            $file,
+        ]);
 
-        Arr::set($this->translations, $locale . '.' . $module, $translations);
+        Arr::set($this->translations, $key, include $path);
     }
 }
