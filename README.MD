@@ -120,6 +120,10 @@ If pluralization is disabled, it will be accessible in `/user/index` URL. If rou
 it will be accessible in `/index` URL. You can disable route prefix by setting `disableWebRoutePrefix` property
 to `true`. Namespace of the controller will be `Modules\User\Http\Controllers`.
 
+#### Notice
+By default all routes has `auth` middleware. To disable it you can set `mustBeAuthenticated` property to `false` 
+from `UserServiceProvider`. The same way if you want all routes for guests, you can set `mustBeGuest` property to `true`.
+
 -------------------
 
 Lets say we have a route in `api.php`:
@@ -139,13 +143,10 @@ For more understanding, you can check `RoutesLoader.php` file.
 
 To access config, you can use `config('User::auth.type')`. It will get `type` from `modules/User/config/auth.php` file.
 
-```php
-config('user.user_model');
-```
-
 ### Translation
 
-To access translation, you can use `__('User::auth.type')`. It will get `type` from `modules/User/lang/en/auth.php` file.
+To access translation, you can use `trans('User::auth.type')`. It will get `type` from `modules/User/lang/en/auth.php` 
+file.
 
 ### Views
 
