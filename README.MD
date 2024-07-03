@@ -65,18 +65,18 @@ Next you need to register this service provider in `bootstrap/providers.php` fil
 
 Inside `ModuleServiceProvider` we have different loaders:
 
-| Path                                             | Register & Usage                                                                                                             |
-|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| modules/{module}/app/Commands                    | $commands property in ServiceProvider                                                                                        |
-| modules/{module}/app/Events                      | $events property in ServiceProvider                                                                                          |
-| modules/{module}/app/Observers                   | $observers property in ServiceProvider                                                                                       |
-| modules/{module}/app/Policies                    | $policies property in ServiceProvider                                                                                        |
-| modules/{module}/config                          | all files from modules/{module}/config folder will be registered. Can be accessed like: config(’User::settings.max_attempt’) |
-| modules/{module}/database/migrations             | all files from modules/{module}/database/migrations folder will be registered                                                |
-| modules/{module}/routes                          | web.php, api.php and console.php will be registered                                                                          |
-| modules/{module}/lang                            | Can be accessed like: trans(’User::details.full_name’)                                                                       |
-| modules/{module}/views                           | Can be accessed like: view('User::about.details')                                                                            |
-| modules/{module}/database/seeders/DatabaseSeeder | It must extend BaseDatabaseSeeder. Other seeders must be registered in its $earlySeeders or $seeders property                |
+| Path                                               | Register & Usage                                                                                                                 |
+|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `modules/{module}/app/Commands`                    | `$commands` property in ServiceProvider                                                                                          |
+| `modules/{module}/app/Events`                      | `$events` property in ServiceProvider                                                                                            |
+| `modules/{module}/app/Observers`                   | `$observers` property in ServiceProvider                                                                                         |
+| `modules/{module}/app/Policies`                    | `$policies` property in ServiceProvider                                                                                          |
+| `modules/{module}/config`                          | all files from `modules/{module}/config` folder will be registered. Can be accessed like: `config(’User::settings.max_attempt’)` |
+| `modules/{module}/database/migrations`             | all files from `modules/{module}/database/migrations` folder will be registered                                                  |
+| `modules/{module}/routes`                          | `web.php`, `api.php` and `console.php` will be registered                                                                        |
+| `modules/{module}/lang`                            | Can be accessed like: `trans(’User::details.full_name’)`                                                                         |
+| `modules/{module}/views`                           | Can be accessed like: `view('User::about.details')`                                                                              |
+| `modules/{module}/database/seeders/DatabaseSeeder` | It must extend `BaseDatabaseSeeder`. Other seeders must be registered in its `$earlySeeders` or `$seeders` property              |
 
 ## Routes
 
@@ -86,12 +86,12 @@ Inside `ModuleServiceProvider` we have different loaders:
 Route::get('/index', [UserController::class, 'index'])->name('index');
 ```
 
-| option     | default                         | modification                                                                                                                                  |
-|------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| name       | `users.index`                   | to make it user.index set $disableRoutePluralization = true in UserServiceProvider                                                            |
-| namespace  | `Modules\User\Http\Controllers` |                                                                                                                                               |
-| middleware | `[’web’, ‘auth’]`               | to remove auth set $mustBeAuthenticated = false in UserServiceSeeder . To make all routes for guest, set $mustBeGuest = true                  |
-| url        | `/users/index`                  | to make it /user/index set $disableRoutePluralization = true in UserServiceProvider. To make it just /index set $disableWebRoutePrefix = true |
+| option     | default                         | modification                                                                                                                                            |
+|------------|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name       | `users.index`                   | to make it `user.index` set `$disableRoutePluralization = true` in `UserServiceProvider`                                                                |
+| namespace  | `Modules\User\Http\Controllers` |                                                                                                                                                         |
+| middleware | `[’web’, ‘auth’]`               | to remove `auth` set `$mustBeAuthenticated = false` in `UserServiceSeeder` . To make all routes for guest, set `$mustBeGuest = true`                    |
+| url        | `/users/index`                  | to make it `/user/index` set `$disableRoutePluralization = true` in `UserServiceProvider`. To make it just `/index` set `$disableWebRoutePrefix = true` |
 
 -------------------
 
@@ -101,9 +101,9 @@ Route::get('/index', [UserController::class, 'index'])->name('index');
 Route::get('/index', [UserController::class, 'index'])->name('index');
 ```
 
-| option     | default                           | modification                                                                                                                |
-|------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| name       | api.users.index                   | to make it api.user.index set $disableRoutePluralization = true in UserServiceProvider                                      |
-| namespace  | Modules\User\Http\Api\Controllers |                                                                                                                             |
-| middleware | [’api’, ‘auth’]                   | to remove auth set $mustBeAuthenticated = false in UserServiceSeeder. To make all routes for guest, set $mustBeGuest = true |
-| url        | /api/users/index                  | to make it /api/user/index set $disableRoutePluralization = true in UserServiceProvider.                                    |
+| option     | default                           | modification                                                                                                                      |
+|------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| name       | api.users.index                   | to make it `api.user.index` set `$disableRoutePluralization = true` in `UserServiceProvider`                                      |
+| namespace  | Modules\User\Http\Api\Controllers |                                                                                                                                   |
+| middleware | [’api’, ‘auth’]                   | to remove auth set `$mustBeAuthenticated = false` in `UserServiceSeeder`. To make all routes for guest, set `$mustBeGuest = true` |
+| url        | /api/users/index                  | to make it `/api/user/index` set `$disableRoutePluralization = true` in `UserServiceProvider`.                                    |
