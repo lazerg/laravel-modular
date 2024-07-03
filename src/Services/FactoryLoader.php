@@ -31,7 +31,7 @@ class FactoryLoader
         $moduleName = $modelName[1];
         $modelName  = $modelName[3];
 
-        return "Modules\\$moduleName\\Factories\\{$modelName}Factory";
+        return "Modules\\$moduleName\\Database\\Factories\\{$modelName}Factory";
     }
 
     /**
@@ -43,7 +43,7 @@ class FactoryLoader
         $modelName = explode('\\', get_class($factory));
 
         $moduleName = $modelName[1];
-        $modelName  = Str::before($modelName[3], 'Factory');
+        $modelName  = Str::before($modelName[4], 'Factory');
 
         return "Modules\\$moduleName\\Models\\$modelName";
     }
