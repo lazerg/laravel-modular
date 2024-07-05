@@ -3,8 +3,6 @@
 namespace Lazerg\LaravelModular;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @class Modular
@@ -15,7 +13,7 @@ class Modular
     /**
      * @var \Illuminate\Support\Collection
      */
-    public Collection $modules;
+    protected Collection $modules;
 
     /**
      * Modular constructor.
@@ -32,6 +30,14 @@ class Modular
     public function addModule(string $module): void
     {
         $this->modules->add($module);
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
     }
 
     /**

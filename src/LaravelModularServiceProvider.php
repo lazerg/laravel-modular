@@ -3,7 +3,6 @@
 namespace Lazerg\LaravelModular;
 
 use Illuminate\Support\ServiceProvider;
-use Lazerg\LaravelModular\Commands\Frontend\TranslationsGeneratorCommand;
 use Lazerg\LaravelModular\Services\FactoryLoader;
 
 /**
@@ -31,7 +30,8 @@ class LaravelModularServiceProvider extends ServiceProvider
         $this->app->make(FactoryLoader::class)->load();
 
         $this->commands([
-            TranslationsGeneratorCommand::class,
+            Commands\Frontend\TranslationsGeneratorCommand::class,
+            Commands\Maker\MakeMigration::class,
         ]);
     }
 }
